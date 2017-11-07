@@ -4,18 +4,25 @@ def are_reverse(string_1, string_2)
   string_length = (string_1.length - 1)
   status = []
 
-  for i in 0..(string_length)
-    if string_1[i] === string_2[string_length - i]
-      status[i] = true
-    end
-  end
+  if string_1.length == string_2.length
 
-  if status.length == string_1.length
-    true
+    for i in 0..(string_length)
+      if string_1[i] === string_2[string_length - i]
+        status[i] = true
+      end
+    end
+
+    if status.length == string_1.length
+      true
+    else
+      false
+    end
+
   else
-    false
+    "The Length of the two String is not similar"
+
   end
 
 end
 
-p are_reverse("ABC", "CBA")
+p are_reverse("ABC", "BCA")
