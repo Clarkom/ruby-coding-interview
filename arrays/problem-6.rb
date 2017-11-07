@@ -13,23 +13,16 @@ def second_largest(numbers)
     for number in numbers
 
       if largest == nil
-        puts "largest == nil  : largest = #{number}"
         largest = number
 
       elsif number > largest
-        puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-        puts "number > largest: ELSEIF #{number} > #{largest} THEN second_largest = #{largest}"
-        puts "number > largest: ELSEIF #{number} > #{largest} THEN largest = #{number}"
-        puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
         second_largest = largest
         largest = number
 
       elsif second_largest == nil
-        puts "second_largest == nil   : second_largest = #{number}"
         second_largest = number
 
       elsif number > second_largest
-        puts "number > second_lagest  : second_largest = #{number}"
         second_largest = number
 
       end
