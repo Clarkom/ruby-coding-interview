@@ -8,8 +8,8 @@ def second_largest(numbers)
 
   if !numbers.empty? && numbers.size > 1
 
+    #
     maximum = numbers[0]
-
     numbers.each_with_index do |number, index|
       if maximum < numbers[index]
         maximum = numbers[index]
@@ -17,11 +17,19 @@ def second_largest(numbers)
       end
     end
 
-    puts maximum
+    #
+    maximum_2 = numbers[0]
+    numbers.each_with_index do |number, index|
+      if maximum_2 < numbers[index]
+        maximum_2 = numbers[index]
+      end
+    end
+
+    puts maximum_2
 
   end
 
 end
 
-numbers = [34, 9456, 4356, 1034, 5, 128]
+numbers = [34, 9456, 4356, 7034, 5, 128]
 second_largest(numbers)
