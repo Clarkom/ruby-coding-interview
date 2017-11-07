@@ -5,31 +5,41 @@ require 'awesome_print'
 # The function return Null if the array is empty
 # The Function return Null if the array has only one element
 def second_largest(numbers)
-
   if !numbers.empty? && numbers.size > 1
 
-    #
-    maximum = numbers[0]
-    numbers.each_with_index do |number, index|
-      if maximum < numbers[index]
-        maximum = numbers[index]
-        numbers.delete_at(index)
+    largest = nil
+    second_largest = nil
+
+    for number in numbers
+
+      if largest == nil
+        puts "largest == nil  : largest = #{number}"
+        largest = number
+
+      elsif number > largest
+        puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+        puts "number > largest: ELSEIF #{number} > #{largest} THEN second_largest = #{largest}"
+        puts "number > largest: ELSEIF #{number} > #{largest} THEN largest = #{number}"
+        puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+        second_largest = largest
+        largest = number
+
+      elsif second_largest == nil
+        puts "second_largest == nil   : second_largest = #{number}"
+        second_largest = number
+
+      elsif number > second_largest
+        puts "number > second_lagest  : second_largest = #{number}"
+        second_largest = number
+
       end
     end
 
-    #
-    maximum_2 = numbers[0]
-    numbers.each_with_index do |number, index|
-      if maximum_2 < numbers[index]
-        maximum_2 = numbers[index]
-      end
-    end
-
-    puts maximum_2
+    second_largest
 
   end
-
 end
 
-numbers = [34, 9456, 4356, 7034, 5, 128]
+numbers = [1, 3, 5, 120, 2, 34, 24, 469, 89, 53, 22,24, 565, 34]
 second_largest(numbers)
+
