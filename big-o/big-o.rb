@@ -67,28 +67,19 @@ class BigONotation
 
     @arraySize = @theArray.size
 
-    time_elapsed = Benchmark.measure {
-      loop do
-        swapped = false
-        (@arraySize - 1).times do |i|
-          if @theArray[i] > @theArray[i+1]
-            @theArray[i], @theArray[i+1] = @theArray[i+1], @theArray[i]
-            swapped = true
-          end
+    loop do
+      swapped = false
+      (@arraySize - 1).times do |i|
+        if @theArray[i] > @theArray[i+1]
+          @theArray[i], @theArray[i+1] = @theArray[i+1], @theArray[i]
+          swapped = true
         end
-
-        break if not swapped
       end
-    }
 
-    puts "Sorting Numbers Took: #{time_elapsed}"
-    ap @theArray
+      break if not swapped
+    end
+
+    @theArray
   end
 
 end
-
-list = Array.new(10) { rand(1...40) }
-algorithm = BigONotation.new(list)
-algorithm.bubbleSort
-
-
