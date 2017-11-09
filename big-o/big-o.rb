@@ -10,7 +10,7 @@ class BigONotation
 
   # An Algorithm that executes in the same
   # time regardless of the amount of data
-  # This code executes in teh same amount of
+  # This code executes in the same amount of
   # time no matter how big the array is
   #
   # O(1)
