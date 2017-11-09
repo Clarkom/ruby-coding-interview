@@ -19,6 +19,20 @@ class BigONotation
     return @theArray
   end
 
+  # Pushing and Popping into the Stack
+  #
+  # O(1)
+  def pushAndPopToStack(list, newItem = nil, option)
+    if (option == 'push')
+      list.push(newItem)
+    end
+    if (option == 'pop')
+      list.pop
+    end
+
+    return @theArray
+  end
+
   # An Algorithm thats time to complete will
   # grow in direct proportion to the amount of data
   # The linear search in a example of this

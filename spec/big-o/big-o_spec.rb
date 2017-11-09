@@ -2,40 +2,82 @@ require './big-o/big-o'
 
 RSpec.describe BigONotation do
 
+  #
+  #
   # Add Item To An Array O(1)
-  describe '# addItemToArray' do
+  describe '#addItemToArray' do
 
-    context 'if the array is small' do
+    # Small List
+    context 'if the list is small' do
 
       before do
-        @list = [67]
-        @list_2 = Array.new(4) { rand(1..60) }
-        @prev_size = @list.size
-        @algorithm = BigONotation.new(@list)
-        @algorithm_2 = BigONotation.new(@list_2)
+        @small_list = [67]
+        @prev_size = @small_list.size
+        @algorithm = BigONotation.new(@small_list)
       end
 
-      it 'it increment the size by 1 item' do
+      it 'should increment the size of the array by 1 item' do
         @algorithm.addItemToArray(128)
-        expect(@list.size). to eq (@prev_size + 1)
+        expect(@small_list.size). to eq (@prev_size + 1)
       end
 
-      it 'it increment the size by 2 items' do
+      it 'should increment the size of the array by 2 items' do
         @algorithm.addItemToArray(36)
         @algorithm.addItemToArray(51)
-        expect(@list.size).to eq (@prev_size + 2)
+        expect(@small_list.size).to eq (@prev_size + 2)
       end
 
-      #it 'it has the same amout of running time' do
-      #  expect {
-      #    @algorithm_2.addItemToArray(78)
-      #  }.to perform_under(0.01).and_sample(10)
-      #end
+      it 'should perform under 0.1 second' do
+        expect {
+          @algorithm.addItemToArray(17)
+        }.to perform_under(0.1).sec
+      end
 
+    end
+
+    # Big List
+    context 'if the list is big' do
+      before do
+        @small_list = Array.new(1) { rand(1..4) }
+        @big_list = Array.new(30) { rand(20..100) }
+      end
+
+      it 'should perform under 0.1 second' do
+        @algorithm_2 = BigONotation.new(@big_list)
+
+        expect {
+          @algorithm_2.addItemToArray(12)
+        }.to perform_under(0.1).sec
+
+      end
     end
 
   end
 
+  # Pushing and Popping into the Stack O(1)
+  describe '#pushAndPopToStack' do
+
+    before do
+      @list = [45, 87, 123, 65]
+      @algorithm = BigONotation.new(@list)
+    end
+
+    it 'should add one item into the last index' do
+      @algorithm.pushAndPopToStack(@list, 54, 'push')
+      expect(@list[-1]).to eq 54
+    end
+
+    it 'should remove one item from the end of the list' do
+      @algorithm.pushAndPopToStack(@list, 54, 'push')
+      @algorithm.pushAndPopToStack(@list, 'pop')
+      expect(@list[-1]).to_not eq 54
+      expect(@list[-1]).to eq 65
+    end
+
+  end
+
+  #
+  #
   # Bubble Sort O(N^2)
   describe '# bubbleSort' do
 
