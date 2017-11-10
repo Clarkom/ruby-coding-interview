@@ -3,11 +3,6 @@ require 'benchmark'
 
 class BigONotation
 
-  def initialize(items)
-    @theArray = items
-    @itemsInArray = 0
-  end
-
   # An Algorithm that executes in the same
   # time regardless of the amount of data
   # This code executes in the same amount of
@@ -77,23 +72,43 @@ class BigONotation
   # meaning, the list is sorted
   #
   # O(N^2)
-  def bubbleSort
+  def bubbleSort(list)
 
-    @arraySize = @theArray.size
+    # Get the size of the list
+    arraySize = list.size
 
     loop do
+
+      # Set the default value of swapped to false
       swapped = false
-      (@arraySize - 1).times do |i|
-        if @theArray[i] > @theArray[i+1]
-          @theArray[i], @theArray[i+1] = @theArray[i+1], @theArray[i]
+
+      # Go through the list One by One
+      (arraySize - 1).times do |i|
+
+        # Check if the previous element on the list
+        # is greater than the next one
+        if (list[i] > list[i+1])
+
+          # if the condition is true
+          # Swappe the two selected number using
+          # Parallel Assignement
+          list[i], list[i+1] = list[i+1], list[i]
+
+          # Set swapped to true, if there are non checked
+          # elements on the list
           swapped = true
+
         end
+
       end
 
+      # No swapping left
       break if not swapped
     end
 
-    @theArray
+    # Return the Sorted Array
+    list
   end
 
 end
+

@@ -1,4 +1,5 @@
 require './big-o/big-o'
+require 'benchmark/ips'
 
 RSpec.describe BigONotation do
 
@@ -16,23 +17,22 @@ RSpec.describe BigONotation do
         @algorithm = BigONotation.new(@small_list)
       end
 
-      it 'should increment the size of the array by 1 item' do
+      xit 'should increment the size of the array by 1 item' do
         @algorithm.addItemToArray(128)
         expect(@small_list.size). to eq (@prev_size + 1)
       end
 
-      it 'should increment the size of the array by 2 items' do
+      xit 'should increment the size of the array by 2 items' do
         @algorithm.addItemToArray(36)
         @algorithm.addItemToArray(51)
         expect(@small_list.size).to eq (@prev_size + 2)
       end
 
-      it 'should perform under 0.1 second' do
+      xit 'should perform under 0.1 second' do
         expect {
           @algorithm.addItemToArray(17)
         }.to perform_under(0.1).sec
       end
-
     end
 
     # Big List
@@ -42,7 +42,7 @@ RSpec.describe BigONotation do
         @big_list = Array.new(30) { rand(20..100) }
       end
 
-      it 'should perform under 0.1 second' do
+      xit 'should perform under 0.1 second' do
         @algorithm_2 = BigONotation.new(@big_list)
 
         expect {
@@ -51,7 +51,6 @@ RSpec.describe BigONotation do
 
       end
     end
-
   end
 
   # Pushing and Popping into the Stack O(1)
@@ -62,12 +61,12 @@ RSpec.describe BigONotation do
       @algorithm = BigONotation.new(@list)
     end
 
-    it 'should add one item into the last index' do
+    xit 'should add one item into the last index' do
       @algorithm.pushAndPopToStack(@list, 54, 'push')
       expect(@list[-1]).to eq 54
     end
 
-    it 'should remove one item from the end of the list' do
+    xit 'should remove one item from the end of the list' do
       @algorithm.pushAndPopToStack(@list, 54, 'push')
       @algorithm.pushAndPopToStack(@list, 'pop')
       expect(@list[-1]).to_not eq 54
@@ -81,10 +80,29 @@ RSpec.describe BigONotation do
   # Bubble Sort O(N^2)
   describe '# bubbleSort' do
 
-    it 'sorts the list correctly' do
-      @list = [12, 34, 56]
-      @algorithm = BigONotation.new(@list)
-      expect(@algorithm.bubbleSort).to eq @list.sort
+    before do
+      @algorithm = BigONotation.new
+    end
+
+    xit 'sorts the list correctly' do
+      @list = Array.new(20) { rand 2..67 }
+      expect(@algorithm.bubbleSort(@list)).to eq @list.sort
+    end
+
+    it 'takes more time if the list is big' do
+
+      small_list = Array.new(2) { rand(1..10) }
+      big_list = Array.new(100) { rand(1..1000) }
+
+      message = Benchmark.ips do |x|
+        x.report('small list:') { @algorithm.bubbleSort(small_list) }
+        x.report('big list:') { @algorithm.bubbleSort(big_list) }
+        x.compare!
+      end
+
+      ap message.entries[0]
+      ap message.entries[1]
+
     end
 
   end
