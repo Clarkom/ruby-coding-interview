@@ -9,9 +9,10 @@ class BigONotation
   # time no matter how big the array is
   #
   # O(1)
-  def addItemToArray(newItem)
-    @theArray[@itemsInArray += 1] = newItem
-    return @theArray
+  def addItemToArray(list, newItem)
+    itemsInArray = list.size - 1
+    list[itemsInArray += 1] = newItem
+    return list
   end
 
   # Pushing and Popping into the Stack

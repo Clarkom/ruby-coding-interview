@@ -3,6 +3,10 @@ require 'benchmark/ips'
 
 RSpec.describe BigONotation do
 
+  before do
+    @algorithm = BigONotation.new
+  end
+
   #
   #
   # Add Item To An Array O(1)
@@ -12,25 +16,25 @@ RSpec.describe BigONotation do
     context 'if the list is small' do
 
       before do
-        @small_list = [67]
-        @prev_size = @small_list.size
-        @algorithm = BigONotation.new(@small_list)
+        @list = Array.new(4) { rand 3..74 }
+        @prev_size = @list.size
       end
 
       xit 'should increment the size of the array by 1 item' do
-        @algorithm.addItemToArray(128)
-        expect(@small_list.size). to eq (@prev_size + 1)
+        ap @list.size
+        @algorithm.addItemToArray(@list, 128)
+        expect(@list.size). to eq (@prev_size + 1)
       end
 
       xit 'should increment the size of the array by 2 items' do
-        @algorithm.addItemToArray(36)
-        @algorithm.addItemToArray(51)
-        expect(@small_list.size).to eq (@prev_size + 2)
+        @algorithm.addItemToArray(@list, 36)
+        @algorithm.addItemToArray(@list, 51)
+        expect(@list.size).to eq (@prev_size + 2)
       end
 
       xit 'should perform under 0.1 second' do
         expect {
-          @algorithm.addItemToArray(17)
+          @algorithm.addItemToArray(@list, 17)
         }.to perform_under(0.1).sec
       end
     end
@@ -38,15 +42,12 @@ RSpec.describe BigONotation do
     # Big List
     context 'if the list is big' do
       before do
-        @small_list = Array.new(1) { rand(1..4) }
         @big_list = Array.new(30) { rand(20..100) }
       end
 
       xit 'should perform under 0.1 second' do
-        @algorithm_2 = BigONotation.new(@big_list)
-
         expect {
-          @algorithm_2.addItemToArray(12)
+          @algorithm.addItemToArray(@big_list, 12)
         }.to perform_under(0.1).sec
 
       end
@@ -58,7 +59,6 @@ RSpec.describe BigONotation do
 
     before do
       @list = [45, 87, 123, 65]
-      @algorithm = BigONotation.new(@list)
     end
 
     xit 'should add one item into the last index' do
@@ -80,28 +80,23 @@ RSpec.describe BigONotation do
   # Bubble Sort O(N^2)
   describe '# bubbleSort' do
 
-    before do
-      @algorithm = BigONotation.new
-    end
-
-    xit 'sorts the list correctly' do
+    it 'should sorts the list correctly' do
       @list = Array.new(20) { rand 2..67 }
       expect(@algorithm.bubbleSort(@list)).to eq @list.sort
     end
 
-    it 'takes more time if the list is big' do
+    it 'should takes more time sorting a big list' do
 
-      small_list = Array.new(2) { rand(1..10) }
-      big_list = Array.new(100) { rand(1..1000) }
+      small_list = Array.new(1) { rand(1..10) }
+      big_list = Array.new(20) { rand(1..50) }
 
-      message = Benchmark.ips do |x|
-        x.report('small list:') { @algorithm.bubbleSort(small_list) }
+      reports = Benchmark.ips(:quiet => true) do |x|
         x.report('big list:') { @algorithm.bubbleSort(big_list) }
+        x.report('small list:') { @algorithm.bubbleSort(small_list) }
         x.compare!
       end
 
-      ap message.entries[0]
-      ap message.entries[1]
+      ap reports.entries[0].stats.error
 
     end
 
