@@ -77,7 +77,7 @@ RSpec.describe BigONotation do
 
   #
   #
-  # Bubble Sort O(N^2)
+  # Bubble Sort O(n^2)
   describe '# bubbleSort' do
 
     it 'should sorts the list correctly' do
@@ -99,6 +99,13 @@ RSpec.describe BigONotation do
       ap reports.entries[0].stats.error
 
     end
+
+  end
+
+  #
+  #
+  # Insertion Sort O(n^2)
+  describe '# insertionSort' do
 
   end
 

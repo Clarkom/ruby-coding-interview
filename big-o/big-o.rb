@@ -72,7 +72,7 @@ class BigONotation
   # there are non longer any swaps to make
   # meaning, the list is sorted
   #
-  # O(N^2)
+  # O(n^2)
   def bubbleSort(list)
 
     # Get the size of the list
@@ -109,6 +109,9 @@ class BigONotation
 
     # Return the Sorted Array
     list
+  end
+
+  def insertionSort
   end
 
 end
