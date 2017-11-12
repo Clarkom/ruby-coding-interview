@@ -85,7 +85,7 @@ RSpec.describe BigONotation do
       expect(@algorithm.bubbleSort(@list)).to eq @list.sort
     end
 
-    it 'should takes more time sorting a big list' do
+    xit 'should takes more time sorting a big list' do
 
       small_list = Array.new(1) { rand(1..10) }
       big_list = Array.new(20) { rand(1..50) }
@@ -96,7 +96,7 @@ RSpec.describe BigONotation do
         x.compare!
       end
 
-      ap reports.entries[0].stats.error
+     ap reports.entries[0].stats.error
 
     end
 
@@ -106,6 +106,15 @@ RSpec.describe BigONotation do
   #
   # Insertion Sort O(n^2)
   describe '# insertionSort' do
+
+    before do
+      @list = [1, 5, 3, 4, 6, 3]
+      @ordered_list = [1, 3, 3, 4, 5, 6]
+    end
+
+    it 'should sorts the list correctly' do
+      expect(@algorithm.insertionSort(@list)).to eq @ordered_list
+    end
 
   end
 

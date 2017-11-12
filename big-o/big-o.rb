@@ -111,7 +111,30 @@ class BigONotation
     list
   end
 
-  def insertionSort
+  #
+  #
+  #
+  #
+  # O(n^2)
+  def insertionSort(list)
+	  final = [list[0]]
+    list.delete_at(0)
+    # main code
+    for i in list
+      final_index = 0
+      while final_index < final.length
+        if i <= final[final_index]
+          final.insert(final_index,i)
+          break
+        elsif final_index == final.length-1
+          final.insert(final_index+1,i)
+          break
+        end
+        final_index+=1
+      end
+    end
+    # output
+    final
   end
 
 end
