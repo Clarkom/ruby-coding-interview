@@ -238,5 +238,25 @@ class BigONotation
     return array
   end
 
+	#
+	#
+	#
+	# O(log(n))
+  def binarySearch(array, value, from=0, to=nil)
+    if to == nil
+      to = array.count - 1
+    end
+
+    mid = (from + to) / 2
+
+    if value < array[mid]
+      return binarySearch array, value, from, mid - 1
+    elsif value > array[mid]
+      return binarySearch array, value, mid + 1, to
+    else
+      return mid
+    end
+  end
+
 end
 

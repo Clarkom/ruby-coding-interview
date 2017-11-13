@@ -138,7 +138,7 @@ RSpec.describe BigONotation do
   #
   #
   # Merge Sort O(n * log(n))
-  describe '# mergeSort' do
+  describe '# mergeSort', skip: true do
 
     before do
       @list = [1, 4, 7, 9, 12].shuffle
@@ -147,6 +147,27 @@ RSpec.describe BigONotation do
 
     it 'should sort the list correctly' do
       expect(@algorithm.mergeSort(@list)).to eq @sorted_list
+    end
+
+  end
+
+
+  #
+  #
+  # Binary Search
+  describe '# binarySearch' do
+
+    before do
+      @list = (50..100).to_a
+    end
+
+    it 'should be sorted' do
+      expect(@list).to eq @list.sort
+    end
+
+    it 'should sort the list correctly' do
+      offset = @algorithm.binarySearch(@list, 65)
+      expect(@list[offset]).to eq 65
     end
 
   end
