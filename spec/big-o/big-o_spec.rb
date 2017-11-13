@@ -10,7 +10,7 @@ RSpec.describe BigONotation do
   #
   #
   # Add Item To An Array O(1)
-  describe '#addItemToArray' do
+  describe '#addItemToArray', skip: true do
 
     # Small List
     context 'if the list is small' do
@@ -20,19 +20,19 @@ RSpec.describe BigONotation do
         @prev_size = @list.size
       end
 
-      xit 'should increment the size of the array by 1 item' do
+      it 'should increment the size of the array by 1 item' do
         ap @list.size
         @algorithm.addItemToArray(@list, 128)
         expect(@list.size). to eq (@prev_size + 1)
       end
 
-      xit 'should increment the size of the array by 2 items' do
+      it 'should increment the size of the array by 2 items' do
         @algorithm.addItemToArray(@list, 36)
         @algorithm.addItemToArray(@list, 51)
         expect(@list.size).to eq (@prev_size + 2)
       end
 
-      xit 'should perform under 0.1 second' do
+      it 'should perform under 0.1 second' do
         expect {
           @algorithm.addItemToArray(@list, 17)
         }.to perform_under(0.1).sec
@@ -45,7 +45,7 @@ RSpec.describe BigONotation do
         @big_list = Array.new(30) { rand(20..100) }
       end
 
-      xit 'should perform under 0.1 second' do
+      it 'should perform under 0.1 second' do
         expect {
           @algorithm.addItemToArray(@big_list, 12)
         }.to perform_under(0.1).sec
@@ -55,18 +55,18 @@ RSpec.describe BigONotation do
   end
 
   # Pushing and Popping into the Stack O(1)
-  describe '#pushAndPopToStack' do
+  describe '#pushAndPopToStack', skip: true do
 
     before do
       @list = [45, 87, 123, 65]
     end
 
-    xit 'should add one item into the last index' do
+    it 'should add one item into the last index' do
       @algorithm.pushAndPopToStack(@list, 54, 'push')
       expect(@list[-1]).to eq 54
     end
 
-    xit 'should remove one item from the end of the list' do
+    it 'should remove one item from the end of the list' do
       @algorithm.pushAndPopToStack(@list, 54, 'push')
       @algorithm.pushAndPopToStack(@list, 'pop')
       expect(@list[-1]).to_not eq 54
@@ -78,14 +78,14 @@ RSpec.describe BigONotation do
   #
   #
   # Bubble Sort O(n^2)
-  describe '# bubbleSort' do
+  describe '# bubbleSort', skip: true do
 
     it 'should sorts the list correctly' do
       @list = Array.new(20) { rand 2..67 }
       expect(@algorithm.bubbleSort(@list)).to eq @list.sort
     end
 
-    xit 'should takes more time sorting a big list' do
+    it 'should takes more time sorting a big list' do
 
       small_list = Array.new(1) { rand(1..10) }
       big_list = Array.new(20) { rand(1..50) }
@@ -105,7 +105,7 @@ RSpec.describe BigONotation do
   #
   #
   # Insertion Sort O(n^2)
-  describe '# insertionSort' do
+  describe '# insertionSort', skip: true do
 
     before do
       @list = [1, 5, 3, 4, 6, 3]
@@ -114,6 +114,23 @@ RSpec.describe BigONotation do
 
     it 'should sorts the list correctly' do
       expect(@algorithm.insertionSort(@list)).to eq @ordered_list
+    end
+
+  end
+
+  #
+  #
+  # Quick Sort O(n * log(n))
+  describe '# quickSort' do
+
+    before do
+      @list = [1, 3, 7, 12, 5, 45].shuffle
+      @ordered_list = [1, 3, 5, 7, 12, 45]
+    end
+
+    it 'should sort the list correctly' do
+      @algorithm.quickSort(@list)
+      expect(@list).to eq @ordered_list
     end
 
   end
