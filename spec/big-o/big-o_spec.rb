@@ -151,10 +151,9 @@ RSpec.describe BigONotation do
 
   end
 
-
   #
   #
-  # Binary Search
+  # Binary Search O(log(n))
   describe '# binarySearch' do
 
     before do
