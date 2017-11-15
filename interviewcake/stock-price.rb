@@ -50,6 +50,39 @@ class StockPrice
     max_profit
   end
 
+
+  # Because we now that we buy before we sell
+  # so in inner for loop we could just look
+  # at every price after the price in our
+  # outer loop
+  #
+  # Get Max Profit Without looking at
+  # every pair twice
+  # O(n^2)
+  def get_max_profit_v2(yesterday_stock_prices)
+
+    max_profit = 0
+
+    # go through every price (with its index as the time)
+    yesterday_stock_prices.each_with_index do |earlier_price, earlier_time|
+
+      # and go through all Later Prices
+      (yesterday_stock_prices[+1..-1]).each do |later_price|
+
+        # see what our profit will be if we bought at the
+        # earlier price and sold at the later price
+        potential_profit = later_price - earlier_price
+
+        # update max_profit if we can do better
+        max_profit = [max_profit, potential_profit].max
+
+      end
+
+    end
+
+    max_profit
+  end
+
 end
 
 
