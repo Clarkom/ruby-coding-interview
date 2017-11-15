@@ -36,4 +36,28 @@ RSpec.describe StockPrice do
 
   end
 
+  describe '# get_max_profit_v4' do
+
+    it 'should raise an argument error if the prices list is less than 2' do
+      yesterday_stock_prices = [7]
+      max_profit = @stock_price.get_max_profit_v4(yesterday_stock_prices)
+      expect(yesterday_stock_prices.length).to be < 2
+      expect(max_profit).to eq 'Getting a profit requires at least 2 prices'
+    end
+
+    it 'should return a negative profit if the value go down' do
+      yesterday_stock_prices = [12, 9, 6]
+      max_profit = @stock_price.get_max_profit_v4(yesterday_stock_prices)
+      expect(max_profit.negative?).to be true
+      expect(max_profit).to eq(-3)
+    end
+
+    it 'should return 0 if all values are similar' do
+      yesterday_stock_prices = [34, 34, 34]
+      max_profit = @stock_price.get_max_profit_v4(yesterday_stock_prices)
+      expect(max_profit).to eq(0)
+    end
+
+  end
+
 end

@@ -108,6 +108,53 @@ class StockPrice
 
   end
 
+
+  # We'll greedly, walk through the list to track
+  # the max profit and the lowest price so far
+  # For every price we check if:
+  #  - we can get better profit by buying at min_price
+  #    and selling at the current_price
+  #  - we a new min_price
+  #
+  #  O(n) Time
+  #  O(1) Space
+  def get_max_profit_v4(yesterday_stock_prices)
+
+    # make sur we have at least two prices
+    if yesterday_stock_prices.length < 2
+      #raise ArgumentError, 'Getting a profit requires at least 2 prices'
+      return 'Getting a profit requires at least 2 prices'
+    end
+
+    # we'll greedly min_price and max_profit, so we initialize
+    # them to the first price and first possible profit
+    min_price = yesterday_stock_prices[0]
+    max_profit = yesterday_stock_prices[1] - yesterday_stock_prices[0]
+
+    # go through every price
+    yesterday_stock_prices.each_with_index do |current_price, index|
+
+      # skip the first time since we already used it
+      # when we initialize min_price and max_profit
+      next if index.zero?
+
+      # see what profit will be if we bought at min_price
+      # and sold at the current_price
+      potential_profit = current_price - min_price
+
+      # update max_profit if we can do better
+      max_profit = [max_profit, potential_profit].max
+
+      # update min_price so it's always the
+      # lowest price we've seen so far
+      min_price = [min_price, current_price].min
+
+    end
+
+    max_profit
+
+  end
+
 end
 
 
