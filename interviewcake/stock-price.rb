@@ -114,7 +114,7 @@ class StockPrice
   # For every price we check if:
   #  - we can get better profit by buying at min_price
   #    and selling at the current_price
-  #  - we a new min_price
+  #  - we have a new min_price
   #
   #  O(n) Time
   #  O(1) Space
@@ -156,5 +156,3 @@ class StockPrice
   end
 
 end
-
-
