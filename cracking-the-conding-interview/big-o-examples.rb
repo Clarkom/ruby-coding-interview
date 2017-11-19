@@ -23,5 +23,19 @@ def foo(numbers)
 
 end
 
-numbers = [3, 2, 4]
-foo(numbers)
+# O(n) - Outer Loop
+# O(n) - Inner Loop
+# The inner for loop has O(n) iterations
+# and it's called n times
+# O(n) * O(n) = O(n^2)
+#
+# Final Result = O(n^2)
+def printPairs(numbers)
+
+  (0...numbers.length).each do |outer_index|
+    (0...numbers.length).each do |inner_index|
+      puts "#{outer_index}, #{inner_index}"
+    end
+  end
+
+end
