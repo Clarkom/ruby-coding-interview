@@ -5,7 +5,7 @@
 #
 # The fact that we iterate through
 # the array twice doesn't matter
-# Final Result = O(n)
+# Final Result = O(n) time
 def foo(numbers)
 
   sum = 0
@@ -29,7 +29,7 @@ end
 # and it's called n times
 # O(n) * O(n) = O(n^2)
 #
-# Final Result = O(n^2)
+# Final Result = O(n^2) time
 def printPairs(numbers)
 
   (0...numbers.length).each do |outer_index|
@@ -46,8 +46,9 @@ end
 # For each element of arrayA, the inner for loop goes
 # through b iterations
 # It's not O(n^2), because there are two different inputs
+# arrayA and arrayB
 #
-# Final Result: O(ab)
+# Final Result: O(ab) time
 def printUnorderedPairs(arrayA, arrayB)
 
   (0...arrayA.length-1).each do |outer_index|
@@ -59,3 +60,20 @@ def printUnorderedPairs(arrayA, arrayB)
   end
 
 end
+
+# The loop goes through the half of the array
+# in terms of iterations does not impact the
+# Big O time
+#
+# Final Resuly: O(n) time
+def reverse(array)
+
+  (0...array.length / 2).each do |index|
+    other = array.length - index - 1
+    temp = array[index]
+    array[index] = array[other]
+    array[other] = temp
+  end
+
+end
+
