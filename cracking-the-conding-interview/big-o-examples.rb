@@ -39,3 +39,23 @@ def printPairs(numbers)
   end
 
 end
+
+
+# The IF statement inside the inner loop is O(1) time
+# since it's just a sequence of constant-time statements
+# For each element of arrayA, the inner for loop goes
+# through b iterations
+# It's not O(n^2), because there are two different inputs
+#
+# Final Result: O(ab)
+def printUnorderedPairs(arrayA, arrayB)
+
+  (0...arrayA.length-1).each do |outer_index|
+    (0..arrayB.length-1).each do |inner_index|
+      if arrayA[outer_index] < arrayB[inner_index]
+        puts "#{arrayA[outer_index]}, #{arrayB[inner_index]}"
+      end
+    end
+  end
+
+end
